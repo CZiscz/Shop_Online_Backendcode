@@ -38,6 +38,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     private final RedisService redisService;
     @Override
+    public User getUserInfo(Integer userId){
+        User user=baseMapper.selectById(userId);
+        if (user==null){
+            throw new ServerException("用户不存在");
+        }
+        return user;
+    }
+    @Override
+    public UserVO editUserInfo(UserVO userVO) {
+        return null;
+    }
+
+    @Override
     public LoginResultVO login(UserLoginQuery query) {
         //  1、获取openId
         String url = "https://api.weixin.qq.com/sns/jscode2session?" +
@@ -75,4 +88,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         return userVO;
     }
+
+
+
 }

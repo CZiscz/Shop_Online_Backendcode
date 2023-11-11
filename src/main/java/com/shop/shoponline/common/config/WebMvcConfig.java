@@ -1,6 +1,6 @@
 package com.shop.shoponline.common.config;
+import com.shop.shoponline.common.interceptor.AuthorizationInterceptor;
 
-import com.soft2242.shop.interceptor.AuthorizationInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

@@ -1,10 +1,10 @@
 package com.shop.shoponline.common.interceptor;
 
-import com.soft2242.shop.common.exception.ServerException;
-import com.soft2242.shop.common.utils.JWTUtils;
-import com.soft2242.shop.constant.APIConstant;
-import com.soft2242.shop.service.RedisService;
-import com.soft2242.shop.vo.UserTokenVO;
+import com.shop.shoponline.common.exception.ServerException;
+import com.shop.shoponline.common.utils.JWTUtils;
+import com.shop.shoponline.constant.APIConstant;
+import com.shop.shoponline.service.RedisService;
+import com.shop.shoponline.vo.UserTokenVO;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
