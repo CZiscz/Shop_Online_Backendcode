@@ -8,15 +8,17 @@ import com.shop.shoponline.vo.UserVO;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author caozhi
  * @since 2023-11-08
  */
 public interface UserService extends IService<User> {
-LoginResultVO login(UserLoginQuery query);
+    LoginResultVO login(UserLoginQuery query);
+
     User getUserInfo(Integer userId);
+
     UserVO editUserInfo(UserVO userVO);
 
 }

@@ -26,7 +26,7 @@ import static com.shop.shoponline.constant.APIConstant.*;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author dq
@@ -37,18 +37,7 @@ import static com.shop.shoponline.constant.APIConstant.*;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     private final RedisService redisService;
-    @Override
-    public User getUserInfo(Integer userId){
-        User user=baseMapper.selectById(userId);
-        if (user==null){
-            throw new ServerException("用户不存在");
-        }
-        return user;
-    }
-    @Override
-    public UserVO editUserInfo(UserVO userVO) {
-        return null;
-    }
+
 
     @Override
     public LoginResultVO login(UserLoginQuery query) {
@@ -60,15 +49,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 "&grant_type=authorization_code";
         RestTemplate restTemplate = new RestTemplate();
         String openIdResult = restTemplate.getForObject(url, String.class);
-        if (StringUtils.contains(openIdResult,WX_ERR_CODE)){
-            throw new ServerException(("openId获取失败"+openIdResult));
+        if (StringUtils.contains(openIdResult, WX_ERR_CODE)) {
+            throw new ServerException(("openId获取失败" + openIdResult));
         }
         //2.解析返回数据
         JSONObject jsonObject = JSON.parseObject(openIdResult);
         String openId = jsonObject.getString(WX_OPENID);
-        User user = baseMapper.selectOne((new LambdaQueryWrapper<User>().eq(User::getOpenId,openId)));
+        User user = baseMapper.selectOne((new LambdaQueryWrapper<User>().eq(User::getOpenId, openId)));
         //3.判断用户是否存在，如果用户不存在直接注册新用户
-        if(user == null){
+        if (user == null) {
             user = new User();
             String account = "用户" + GeneratorCodeUtils.generateCode();
             user.setAvatar(DEFAULT_AVATAR);
@@ -82,13 +71,31 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         //4.生成token，存入redis并设置过期时间
         UserTokenVO tokenVO = new UserTokenVO(userVO.getId());
-        String token = JWTUtils.generateToken(JWT_SECRET,tokenVO.toMap());
-        redisService.set(APP_NAME + userVO.getId(),token,APP_TOKEN_EXPIRE_TIME);
+        String token = JWTUtils.generateToken(JWT_SECRET, tokenVO.toMap());
+        redisService.set(APP_NAME + userVO.getId(), token, APP_TOKEN_EXPIRE_TIME);
         userVO.setToken(token);
 
         return userVO;
     }
 
+    @Override
+    public User getUserInfo(Integer userId) {
+        User user = baseMapper.selectById(userId);
+        if (user == null) {
+            throw new ServerException("用户不存在");
+        }
+        return user;
+    }
 
+    @Override
+    public UserVO editUserInfo(UserVO userVO) {
+        User user = baseMapper.selectById((userVO.getId()));
+        if (user == null) {
+            throw new ServerException("用户不存在");
+        }
+        User userConvert = UserConvert.INSTANCE.convert(userVO);
+        updateById(userConvert);
+        return userVO;
+    }
 
 }
