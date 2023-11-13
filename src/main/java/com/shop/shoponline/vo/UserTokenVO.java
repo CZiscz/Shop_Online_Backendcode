@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.shop.shoponline.constant.APIConstant.APP_TOKEN_EXPIRE_TIME;
+import static com.shop.shoponline.common.constant.APIConstant.APP_TOKEN_EXPIRE_TIME;
 
 @Data
 @NoArgsConstructor

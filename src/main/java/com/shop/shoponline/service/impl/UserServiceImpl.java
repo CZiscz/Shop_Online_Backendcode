@@ -31,7 +31,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
 
-import static com.shop.shoponline.constant.APIConstant.*;
+import static com.shop.shoponline.common.constant.APIConstant.*;
 
 /**
  * <p>
@@ -118,7 +118,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         String filename=file.getOriginalFilename();
         //分隔文件名，获取文件后缀名
         assert filename!=null;
-        String[] fileNameArr=filename.split("\\.");
+        String[] fileNameArr=filename.split("M.");
         String suffix = fileNameArr[fileNameArr.length-1];
         //拼接得到新的上传文件名
         String uploadFileName=fileResource.getObjectName()+ UUID.randomUUID()+"."+suffix;
