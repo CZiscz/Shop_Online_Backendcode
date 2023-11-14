@@ -2,6 +2,10 @@ package com.shop.shoponline.service;
 
 import com.shop.shoponline.entity.UserShoppingCart;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.shop.shoponline.query.CartQuery;
+import com.shop.shoponline.vo.CartGoodsVO;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +17,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface UserShoppingCartService extends IService<UserShoppingCart> {
 
+    CartGoodsVO addShopCart(CartQuery query); //添加购物车
+    List<CartGoodsVO> shopCartList(Integer userId);//购物车列表
 }
