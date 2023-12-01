@@ -25,7 +25,6 @@ import lombok.Setter;
 @TableName("t_user_shopping_cart")
 @ApiModel(value = "UserShoppingCart对象", description = "")
 public class UserShoppingCart {
-
     @ApiModelProperty("主键id")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
@@ -57,7 +56,7 @@ public class UserShoppingCart {
     @ApiModelProperty("逻辑删除(0-未删除，1-已删除)")
     @TableField("delete_flag")
     @TableLogic
-    private Byte deleteFlag;
+    private Integer deleteFlag;
 
     @ApiModelProperty("创建时间")
     @TableField(value = "create_time", fill = FieldFill.INSERT)

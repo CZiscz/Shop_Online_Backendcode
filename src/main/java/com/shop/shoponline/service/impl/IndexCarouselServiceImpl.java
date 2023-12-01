@@ -23,18 +23,16 @@ public class IndexCarouselServiceImpl extends ServiceImpl<IndexCarouselMapper, I
 
     @Override
     public List<IndexCarousel> getList(Integer distributionSite) {
-        //使用wrapper设置查询条件  当distributionSite！=null时作为查询条件
-        //当distributionSite=1查询首页广告
-        //当distributionSite=2查询分类页广告
-        LambdaQueryWrapper<IndexCarousel> wrapper=new LambdaQueryWrapper<>();
-        if(distributionSite !=null){
-            wrapper.eq(IndexCarousel::getType,distributionSite);
+        // 使用wrapper设置查询条件，当distributionSite不为空时，作为条件查询
+        LambdaQueryWrapper<IndexCarousel> wrapper = new LambdaQueryWrapper<>();
+        // distributionSite为1时查询首页广告，为2时查询商品分类页广告
+        if (distributionSite != null) {
+            wrapper.eq(IndexCarousel::getType, distributionSite);
         }
-        //设置排序，根据创建时间倒叙
+        // 设置排序 根据创建时间倒序排序
         wrapper.orderByDesc(IndexCarousel::getCreateTime);
-        //查询广告列表
-        List<IndexCarousel> list=baseMapper.selectList(wrapper);
-        return list;
+        // 查询广告列表
+        return baseMapper.selectList(wrapper);
     }
 }
 

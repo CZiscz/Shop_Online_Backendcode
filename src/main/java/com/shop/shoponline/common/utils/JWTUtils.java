@@ -27,9 +27,7 @@ public class JWTUtils {
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
             return claims.getBody();
-        } catch (MissingClaimException e) {
-            e.printStackTrace();
-        } catch (IncorrectClaimException e) {
+        } catch (MissingClaimException | IncorrectClaimException e) {
             e.printStackTrace();
         }
         return null;

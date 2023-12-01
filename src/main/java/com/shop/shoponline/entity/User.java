@@ -7,6 +7,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.shop.shoponline.common.utils.DateUtils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -60,7 +63,7 @@ public class User {
 
     @ApiModelProperty("性别(0-男，1-女)")
     @TableField("gender")
-    private Byte gender;
+    private Integer gender;
 
     @ApiModelProperty("职业")
     @TableField("profession")
@@ -77,15 +80,15 @@ public class User {
     @ApiModelProperty("区")
     @TableField("county_code")
     private String countyCode;
-
     @ApiModelProperty("生日")
     @TableField("birthday")
+    @JsonFormat(pattern = DateUtils.DATE_PATTERN)
     private LocalDateTime birthday;
 
     @ApiModelProperty("逻辑删除(0-未删除，1-已删除)")
     @TableField("delete_flag")
     @TableLogic
-    private Byte deleteFlag;
+    private Integer deleteFlag;
 
     @ApiModelProperty("创建时间")
     @TableField(value = "create_time", fill = FieldFill.INSERT)

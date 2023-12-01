@@ -27,7 +27,6 @@ public class IndexRecommendServiceImpl extends ServiceImpl<IndexRecommendMapper,
         LambdaQueryWrapper<IndexRecommend> wrapper=new LambdaQueryWrapper<>();
         wrapper.orderByDesc(IndexRecommend::getCreateTime);
         List<IndexRecommend> list=baseMapper.selectList(wrapper);
-        List<IndexRecommendVO> results= IndexRecommendConvert.INSTANCE.convertToUserVoList(list);
-        return results;
+        return IndexRecommendConvert.INSTANCE.convertToUserVoList(list);
     }
 }

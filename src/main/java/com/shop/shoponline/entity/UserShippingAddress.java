@@ -58,8 +58,6 @@ public class UserShippingAddress {
     @TableField("address")
     private String address;
 
-
-
     @ApiModelProperty("是否为默认地址(0-否，1-是)")
     @TableField("is_default")
     private Integer isDefault;
@@ -68,9 +66,6 @@ public class UserShippingAddress {
     @TableField("delete_flag")
     @TableLogic
     private Integer deleteFlag;
-
-
-
 
     @ApiModelProperty("创建时间")
     @TableField(value = "create_time", fill = FieldFill.INSERT)
